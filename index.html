@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> ToDo Web Application</title>
+    <!-- Google Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Arima Madurai' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Battambang' rel='stylesheet'>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- angular.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+</head>
+<body class="container-fluid bg-light">
+    <div ng-app="myApp" ng-controller="myCtrl" class="container-fluid bg-light">
+        <div class="row">
+            <div class="col bg-light" style="font-family: 'Battambang';">
+                <h3
+                    class="text-center shadow rounded text-warning border border-rounded border-gradient-secondary border-3 m-2 p-3">
+                    ToDo Web
+                    Application</h3>
+            </div>
+        </div>
+        <div class="row" style="font-family: 'Arima Madurai';">
+            <form method="POST">
+                <div class="container mt-4">
+                    <div class="input-group mb-1 shadow">
+                        <input type="text" class="form-control" ng-model="t1" placeholder="Enter your task here...">
+                        <button class="btn btn-secondary" ng-click="add()" type='submit'>Add Task</button>
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex justify-content-around">
+                <div class="col-10  border rounded border-gradient border-0.5 m-2">
+                    <h4 class="text-center text-secondary pt-2">To Be Done:</h4>
+                    <div class="container-fluid border border-gradient border-2 text-success">
+                        <ol>
+                            <li ng-repeat="x in newArray" class="pt-2 "> {{x}}
+                                <button class="btn btn-sm ml-4 btn-success" ng-click="add2($index)" type='submit'>Mark
+                                    Done</button>
+                                <hr>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around">
+                <div class="col-10  border rounded border-gradient border-0.5 m-2">
+                    <h4 class="text-center text-secondary pt-2">Done:</h4>
+                    <div class="container-fluid border border-gradient border-2 text-dark">
+                        <ol>
+                            <li ng-repeat="x in newArray2" class="pt-2 "> {{x}}
+                                <button class="btn btn-sm ml-4 btn-danger" ng-click="del($index)"
+                                    type='submit'>Done</button>
+                                <hr>
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var app = angular.module('myApp', []);
+            app.controller('myCtrl', function ($scope, $window) {
+                $scope.newArray = [];
+                $scope.newArray2 = [];
+                $scope.add = function () {
+                    if (typeof ($scope.t1) == "undefined" || $scope.t1 == "" || $scope.t1 == null) {
+                        $window.alert("Please enter a task");
+                    }
+                    else {
+                        if ($scope.newArray.includes($scope.t1)) {
+                            $window.alert("Task already exists");
+                        }
+                        else {
+                            $scope.newArray.push($scope.t1);
+                            $scope.t1 = "";
+                        }
+                    }
+                };
+                $scope.add2 = function ($index) {
+                    $scope.newArray2.push($scope.newArray[$index]);
+                    $scope.newArray.splice($index, 1);
+                };
+                $scope.del = function ($index) {
+                    $scope.newArray2.splice($index, 1);
+                };
+            });
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+</body>
+</html>
