@@ -75,7 +75,10 @@
                     } else {
                         try {
                             var storedTodoList = JSON.parse(localStorage.getItem('todoList')) || [];
-
+                            if (storedTodoList.some(function (item) { return item.task === task; })) {
+                                $window.alert("The same task already exists");
+                                return;
+                            }
                             var newTodoItem = {
                                 id: storedTodoList.length + 1,
                                 task: task
