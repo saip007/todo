@@ -18,7 +18,7 @@ The ToDo Web Application is a simple web-based task management application that 
 
 ## Getting Started
 
-1. Open the hosted application: [ToDo Web Application](https://saip007.github.io/ToDo/)
+1. Open the application here: [ToDo Web Application](https://saip007.github.io/ToDo/)
 2. Start adding and managing your tasks!
 
 ---
